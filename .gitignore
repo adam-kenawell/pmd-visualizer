@@ -1,0 +1,22 @@
+# build output
+dist/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+
+# macOS
+.DS_Store
+
+# jetbrains
+.idea/
+
+# copilot agent files
+agent-context.md
+agent-instructions.md
+.github/copilot-instructions.md
