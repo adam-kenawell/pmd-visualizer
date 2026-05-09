@@ -1,0 +1,1 @@
+{"version":3,"file":"roles.js","sourceRoot":"","sources":["../src/roles.ts"],"names":[],"mappings":"AAAA,qBAAqB;AAErB,MAAM,CAAC,MAAM,YAAY,GAAG;IAC1B,MAAM,EAAE,kBAAkB,EAAE,iBAAiB,EAAE,eAAe,EAAE,eAAe;IAC/E,iBAAiB,EAAE,mBAAmB,EAAE,SAAS,EAAE,OAAO,EAAE,MAAM,EAAE,MAAM;IAC1E,MAAM,EAAE,MAAM,EAAE,aAAa,EAAE,gBAAgB,EAAE,gBAAgB,EAAE,MAAM;CAC1E,CAAC"}
