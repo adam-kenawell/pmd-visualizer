@@ -2,7 +2,7 @@
 
 import { spriteUrl, loadImage, fetchAnimData, calcFrameInfo, type FrameInfo } from './sprites.js';
 
-const ACTIONS = ['Walk', 'Idle', 'Attack'] as const;
+const ACTIONS = ['Walk', 'Idle', 'Attack', 'Sleep'] as const;
 export type Action = (typeof ACTIONS)[number];
 
 export const FRAME_MS = 150;
@@ -82,20 +82,22 @@ export function startAnimLoop(): void {
 export async function createSpriteWidget(dexId: number): Promise<HTMLCanvasElement | null> {
   if (dexId <= 0) return null;
 
-  const [animDims, walkImg, idleImg, attackImg] = await Promise.all([
+  const [animDims, walkImg, idleImg, attackImg, sleepImg] = await Promise.all([
     fetchAnimData(dexId),
     loadImage(spriteUrl(dexId, 'Walk')),
     loadImage(spriteUrl(dexId, 'Idle')),
     loadImage(spriteUrl(dexId, 'Attack')),
+    loadImage(spriteUrl(dexId, 'Sleep')),
   ]);
 
   if (!walkImg && !idleImg) return null;
 
-  const sheets: Record<Action, HTMLImageElement | null> = { Walk: walkImg, Idle: idleImg, Attack: attackImg };
+  const sheets: Record<Action, HTMLImageElement | null> = { Walk: walkImg, Idle: idleImg, Attack: attackImg, Sleep: sleepImg };
   const frameInfo: Record<Action, FrameInfo | null> = {
     Walk: walkImg ? calcFrameInfo(walkImg, animDims['Walk']) : null,
     Idle: idleImg ? calcFrameInfo(idleImg, animDims['Idle']) : null,
     Attack: attackImg ? calcFrameInfo(attackImg, animDims['Attack']) : null,
+    Sleep: sleepImg ? calcFrameInfo(sleepImg, animDims['Sleep']) : null,
   };
 
   const info = frameInfo.Idle || frameInfo.Walk!;

@@ -1,6 +1,6 @@
 // Animated sprite widget for PMD sprites
 import { spriteUrl, loadImage, fetchAnimData, calcFrameInfo } from './sprites.js';
-const ACTIONS = ['Walk', 'Idle', 'Attack'];
+const ACTIONS = ['Walk', 'Idle', 'Attack', 'Sleep'];
 export const FRAME_MS = 150;
 export const SCALE = 2;
 let activeWidgets = [];
@@ -58,19 +58,21 @@ export function startAnimLoop() {
 export async function createSpriteWidget(dexId) {
     if (dexId <= 0)
         return null;
-    const [animDims, walkImg, idleImg, attackImg] = await Promise.all([
+    const [animDims, walkImg, idleImg, attackImg, sleepImg] = await Promise.all([
         fetchAnimData(dexId),
         loadImage(spriteUrl(dexId, 'Walk')),
         loadImage(spriteUrl(dexId, 'Idle')),
         loadImage(spriteUrl(dexId, 'Attack')),
+        loadImage(spriteUrl(dexId, 'Sleep')),
     ]);
     if (!walkImg && !idleImg)
         return null;
-    const sheets = { Walk: walkImg, Idle: idleImg, Attack: attackImg };
+    const sheets = { Walk: walkImg, Idle: idleImg, Attack: attackImg, Sleep: sleepImg };
     const frameInfo = {
         Walk: walkImg ? calcFrameInfo(walkImg, animDims['Walk']) : null,
         Idle: idleImg ? calcFrameInfo(idleImg, animDims['Idle']) : null,
         Attack: attackImg ? calcFrameInfo(attackImg, animDims['Attack']) : null,
+        Sleep: sleepImg ? calcFrameInfo(sleepImg, animDims['Sleep']) : null,
     };
     const info = frameInfo.Idle || frameInfo.Walk;
     const canvas = document.createElement('canvas');

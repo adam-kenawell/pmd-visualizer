@@ -1,5 +1,5 @@
 import { type FrameInfo } from './sprites.js';
-declare const ACTIONS: readonly ["Walk", "Idle", "Attack"];
+declare const ACTIONS: readonly ["Walk", "Idle", "Attack", "Sleep"];
 export type Action = (typeof ACTIONS)[number];
 export declare const FRAME_MS = 150;
 export declare const SCALE = 2;
